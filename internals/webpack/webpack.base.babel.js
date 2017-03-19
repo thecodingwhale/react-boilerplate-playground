@@ -5,6 +5,10 @@
 const path = require('path');
 const webpack = require('webpack');
 
+// use dotenv for loading env varialbes from a .env file.
+const dotenv = require('dotenv');
+dotenv.config();
+
 module.exports = (options) => ({
   entry: options.entry,
   output: Object.assign({ // Compile into js/build.js
@@ -72,6 +76,7 @@ module.exports = (options) => ({
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        API_URL: JSON.stringify(process.env.API_URL),
       },
     }),
     new webpack.NamedModulesPlugin(),

@@ -1,4 +1,6 @@
-import 'whatwg-fetch';
+import axios from 'axios';
+
+axios.defaults.baseURL = process.env.API_URL;
 
 /**
  * Parses the JSON returned by a network request
@@ -8,7 +10,7 @@ import 'whatwg-fetch';
  * @return {object}          The parsed JSON from the request
  */
 function parseJSON(response) {
-  return response.json();
+  return response.data;
 }
 
 /**
@@ -37,7 +39,7 @@ function checkStatus(response) {
  * @return {object}           The response data
  */
 export default function request(url, options) {
-  return fetch(url, options)
+  return axios(url, options)
     .then(checkStatus)
     .then(parseJSON);
 }
