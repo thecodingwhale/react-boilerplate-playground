@@ -31,8 +31,8 @@ const initialState = fromJS({
   },
   user: {
     authenticated: false,
-    token: null,
-    id: null,
+    token: '',
+    id: '',
     email: '',
     name: '',
   },

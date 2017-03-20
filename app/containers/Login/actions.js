@@ -5,11 +5,13 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  SUBMIT_CREDENTIALS,
 } from './constants';
 
-export function defaultAction() {
+export function submitCredentials(email, password) {
   return {
-    type: DEFAULT_ACTION,
+    type: SUBMIT_CREDENTIALS,
+    email,
+    password,
   };
 }
