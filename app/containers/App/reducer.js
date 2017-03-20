@@ -16,6 +16,9 @@ import {
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS,
   LOAD_REPOS_ERROR,
+  LOAD_API,
+  SUCCESS_API,
+  ERROR_API,
 } from './constants';
 
 // The initial state of the App
@@ -25,6 +28,13 @@ const initialState = fromJS({
   currentUser: false,
   userData: {
     repositories: false,
+  },
+  user: {
+    authenticated: false,
+    token: null,
+    id: null,
+    email: '',
+    name: '',
   },
 });
 
@@ -44,6 +54,23 @@ function appReducer(state = initialState, action) {
       return state
         .set('error', action.error)
         .set('loading', false);
+    case LOAD_API:
+      return state
+        .set('loading', true)
+        .set('error', false);
+    case ERROR_API:
+      return state
+        .set('loading', false)
+        .set('error', action.error);
+    case SUCCESS_API:
+      return state
+        .set('loading', false)
+        .set('error', false)
+        .setIn(['user', 'authenticated'], true)
+        .setIn(['user', 'token'], action.payload.token)
+        .setIn(['user', 'id'], action.payload.user.id)
+        .setIn(['user', 'email'], action.payload.user.email)
+        .setIn(['user', 'name'], action.payload.user.name);
     default:
       return state;
   }

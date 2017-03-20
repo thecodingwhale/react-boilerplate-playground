@@ -19,6 +19,9 @@ import {
   LOAD_REPOS,
   LOAD_REPOS_SUCCESS,
   LOAD_REPOS_ERROR,
+  LOAD_API,
+  SUCCESS_API,
+  ERROR_API,
 } from './constants';
 
 /**
@@ -58,6 +61,26 @@ export function reposLoaded(repos, username) {
 export function repoLoadingError(error) {
   return {
     type: LOAD_REPOS_ERROR,
+    error,
+  };
+}
+
+export function loadApi() {
+  return {
+    type: LOAD_API,
+  };
+}
+
+export function successApi(payload) {
+  return {
+    type: SUCCESS_API,
+    payload,
+  };
+}
+
+export function errorApi(error) {
+  return {
+    type: ERROR_API,
     error,
   };
 }
