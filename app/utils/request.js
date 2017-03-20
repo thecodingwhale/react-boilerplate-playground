@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 axios.defaults.baseURL = process.env.API_URL;
+axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 /**
  * Parses the JSON returned by a network request
@@ -24,10 +25,28 @@ function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
+  return response;
+}
 
-  const error = new Error(response.statusText);
-  error.response = response;
-  throw error;
+// Create a new object, that prototypically inherits from the Error constructor
+function APIError(err) {
+  this.status = err.status || 'APIError';
+  this.message = err.message || 'Default Message';
+  this.errors = err.errors || {};
+  this.stack = (new Error()).stack;
+}
+APIError.prototype = Object.create(Error.prototype);
+APIError.prototype.constructor = APIError;
+
+function handleError(response) {
+  let err = JSON.stringify(response);
+  err = JSON.parse(err);
+
+  throw new APIError({
+    status: err.response.status,
+    message: err.response.statusText,
+    errors: err.response.data.error.errors,
+  });
 }
 
 /**
@@ -41,5 +60,6 @@ function checkStatus(response) {
 export default function request(url, options) {
   return axios(url, options)
     .then(checkStatus)
-    .then(parseJSON);
+    .then(parseJSON)
+    .catch(handleError);
 }
