@@ -11,6 +11,7 @@ import H1 from 'components/H1';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { Alert } from 'reactstrap';
+import { browserHistory } from 'react-router';
 import { makeSelectLoading, makeSelectError, makeSelectUser } from 'containers/App/selectors';
 import makeSelectLogin from './selectors';
 import messages from './messages';
@@ -21,6 +22,14 @@ export class Login extends React.Component { // eslint-disable-line react/prefer
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  componentWillReceiveProps(nextProps) {
+    const { user } = nextProps;
+    if (user.authenticated) {
+      setTimeout(() => {
+        browserHistory.push('/dashboard');
+      }, 1000);
+    }
   }
   handleSubmit(crendetials) {
     const email = crendetials.get('email');

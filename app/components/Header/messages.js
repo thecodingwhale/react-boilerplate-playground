@@ -18,4 +18,8 @@ export default defineMessages({
     id: 'boilerplate.components.Header.login',
     defaultMessage: 'Login',
   },
+  dashboard: {
+    id: 'boilerplate.components.Header.dashboard',
+    defaultMessage: 'Dashboard',
+  },
 });
