@@ -23,12 +23,16 @@ export class Login extends React.Component { // eslint-disable-line react/prefer
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+  componentWillMount() {
+    const { user } = this.props;
+    if (user.authenticated) {
+      browserHistory.push('/dashboard');
+    }
+  }
   componentWillReceiveProps(nextProps) {
     const { user } = nextProps;
     if (user.authenticated) {
-      setTimeout(() => {
-        browserHistory.push('/dashboard');
-      }, 1000);
+      browserHistory.push('/dashboard');
     }
   }
   handleSubmit(crendetials) {

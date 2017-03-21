@@ -11,6 +11,7 @@
  */
 
 import { fromJS } from 'immutable';
+import { REHYDRATE } from 'redux-persist/constants';
 
 import {
   LOAD_REPOS_SUCCESS,
@@ -71,6 +72,18 @@ function appReducer(state = initialState, action) {
         .setIn(['user', 'id'], action.payload.user.id)
         .setIn(['user', 'email'], action.payload.user.email)
         .setIn(['user', 'name'], action.payload.user.name);
+    case REHYDRATE: // eslint-disable-line no-case-declarations
+      if (typeof action.payload.global === 'undefined') {
+        return state;
+      }
+      const user = action.payload.global.get('user').toJS();
+      return state
+        .setIn(['user', 'authenticated'], user.authenticated)
+        .setIn(['user', 'token'], user.token)
+        .setIn(['user', 'id'], user.id)
+        .setIn(['user', 'email'], user.email)
+        .setIn(['user', 'name'], user.name);
+
     default:
       return state;
   }
