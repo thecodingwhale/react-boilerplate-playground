@@ -7,7 +7,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import H1 from 'components/H1';
 import { FormattedMessage } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 import { Alert } from 'reactstrap';
@@ -70,9 +69,9 @@ export class Login extends React.Component { // eslint-disable-line react/prefer
             { name: 'description', content: 'Description of Login' },
           ]}
         />
-        <H1>
+        <h1>
           <FormattedMessage {...messages.header} />
-        </H1>
+        </h1>
         {this.renderAlert()}
         <LoginForm
           onSubmit={this.handleSubmit}
