@@ -1,10 +1,16 @@
-// import { fromJS } from 'immutable';
-// import { makeSelectLoginDomain } from '../selectors';
+import { fromJS } from 'immutable';
 
-// const selector = makeSelectLoginDomain();
+import {
+  selectLogin,
+  // makeSelectLogin,
+} from '../selectors';
 
 describe('makeSelectLoginDomain', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('selectLogin() should select the login state', () => {
+    const loginState = fromJS({});
+    const mockedState = fromJS({
+      login: loginState,
+    });
+    expect(selectLogin(mockedState)).toEqual(loginState);
   });
 });

@@ -1,18 +1,27 @@
 
 import {
-  defaultAction,
+  submitCredentials,
 } from '../actions';
 import {
-  DEFAULT_ACTION,
+  SUBMIT_CREDENTIALS,
 } from '../constants';
 
 describe('Login actions', () => {
-  describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
-      const expected = {
-        type: DEFAULT_ACTION,
+  describe('Submit Crendential Action', () => {
+    it('has a type of SUBMIT_CREDENTIALS', () => {
+      const fixture = {
+        email: 'foo@email.com',
+        password: '1234',
       };
-      expect(defaultAction()).toEqual(expected);
+      const { email, password } = fixture;
+      const expected = {
+        type: SUBMIT_CREDENTIALS,
+        email,
+        password,
+      };
+      expect(
+        submitCredentials(email, password)
+      ).toEqual(expected);
     });
   });
 });

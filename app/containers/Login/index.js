@@ -12,7 +12,6 @@ import { createStructuredSelector } from 'reselect';
 import { Alert } from 'reactstrap';
 import { browserHistory } from 'react-router';
 import { makeSelectLoading, makeSelectError, makeSelectUser } from 'containers/App/selectors';
-import makeSelectLogin from './selectors';
 import messages from './messages';
 import LoginForm from './LoginForm';
 import { submitCredentials } from './actions';
@@ -104,7 +103,6 @@ Login.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  Login: makeSelectLogin(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
   user: makeSelectUser(),

@@ -1,25 +1,13 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the login state domain
- */
-const selectLoginDomain = () => (state) => state.get('login');
-
-/**
- * Other specific selectors
- */
-
-
-/**
- * Default selector used by Login
- */
+const selectLogin = () => (state) => state.get('login');
 
 const makeSelectLogin = () => createSelector(
-  selectLoginDomain(),
+  selectLogin(),
   (substate) => substate.toJS()
 );
 
-export default makeSelectLogin;
 export {
-  selectLoginDomain,
+  selectLogin,
+  makeSelectLogin,
 };
