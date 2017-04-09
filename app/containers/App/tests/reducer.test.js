@@ -13,10 +13,13 @@ describe('appReducer', () => {
     state = fromJS({
       loading: false,
       error: false,
-      currentUser: false,
-      userData: fromJS({
-        repositories: false,
-      }),
+      user: {
+        authenticated: false,
+        token: '',
+        id: '',
+        email: '',
+        name: '',
+      },
     });
   });
 
